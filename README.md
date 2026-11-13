@@ -1,6 +1,6 @@
 # Spaceapps-Project-
 
-To-Do chacklist
+To-Do checklist
  - [ ] integrate a 3d model of mars
  - [ ] integrate a map of mars
  - [ ] integrate a system to check the orbiter type mission
