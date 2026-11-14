@@ -405,6 +405,7 @@
 
 .app-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 15px clamp(20px, 4.2vw, 68px); border-top: 1px solid var(--line); background: rgba(23, 19, 25, .78); }
 .app-footer nav { gap: 20px; }
+.footer-back-button { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 0 12px; color: var(--blue); background: transparent; border: 1px solid rgba(0, 212, 255, .38); border-radius: 6px; cursor: default; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .footer-back { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); font-size: 10px; text-decoration: none; }
 .footer-back span { display: grid; width: 23px; height: 23px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--green); transition: background .2s ease; }
 .footer-back:hover { color: var(--ink); text-decoration: none; }
@@ -441,6 +442,7 @@
   .details-section { display: flex; }
   .details-section > .mission-details-panel, .details-section > .isro-callout, .details-section > .sidebar-footnote { grid-column: auto; grid-row: auto; }
   .app-footer { flex-wrap: wrap; justify-content: space-between; padding: 15px 17px; }
+  .footer-back-button { order: -1; }
   .footer-signature { order: 3; width: 100%; justify-content: center; }
   .app-footer nav { gap: 12px; }
   .app-footer nav a { font-size: 9px; }

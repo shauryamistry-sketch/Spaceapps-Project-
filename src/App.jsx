@@ -124,6 +124,8 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
+        {/* Integration placeholder: connect this to the merged app's previous view. */}
+        <button className="footer-back-button" type="button" aria-label="Back">← Back</button>
         <a className="footer-back" href="#top"><span>↑</span> Back to top</a>
         <span className="footer-signature"><span className="footer-sun" /> Footprints on Mars <i>·</i> Mission Explorer</span>
         <nav aria-label="Footer navigation"><a href="#surface-map">Atlas</a><a href="#mission-image">Archive</a><a href="#discoveries">Discoveries</a></nav>
