@@ -1,0 +1,10 @@
+* { box-sizing: border-box; }
+html, body, main { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+body { min-width: 320px; }
+#mars-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+#mars-canvas:active { cursor: grabbing; }
+.controls { position: fixed; right: 22px; bottom: 22px; display: grid; gap: 8px; }
+.controls button { width: 38px; height: 38px; border: 1px solid #555; border-radius: 50%; background: #111; color: #eee; font: 22px Arial, sans-serif; cursor: pointer; }
+.controls button:hover { background: #292929; }
+.load-message { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 420px); color: #eee; text-align: center; font: 14px/1.6 Arial, sans-serif; }
+@media (max-width: 600px) { .controls { right: 14px; bottom: 14px; } }

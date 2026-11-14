@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Mars</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main aria-label="Interactive view of Mars">
+      <canvas id="mars-canvas" aria-label="Mars in space. Drag to rotate and scroll to zoom."></canvas>
+      <div class="controls" aria-label="Zoom controls">
+        <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+        <button id="zoom-out" type="button" aria-label="Zoom out">−</button>
+      </div>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
