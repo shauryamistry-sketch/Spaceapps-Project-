@@ -68,6 +68,7 @@ planetButtons.forEach((button) => button.addEventListener('click', () => {
   for (const { dots } of orbitMarkers) {
     dots.position.copy(planet === 'moon' ? dots.userData.moonPosition : dots.userData.marsPosition);
   }
+  targetLighting = planet === 'moon' ? lightingPresets.moon : lightingPresets.mars;
   planetButtons.forEach((option) => {
     const selected = option === button;
     option.classList.toggle('is-active', selected);
@@ -82,13 +83,19 @@ planetButtons.forEach((button) => button.addEventListener('click', () => {
   }
 }));
 
-scene.add(new THREE.AmbientLight(0x938b88, 1.2));
+const ambient = new THREE.AmbientLight(0x938b88, 1.2);
+scene.add(ambient);
 const sun = new THREE.DirectionalLight(0xffd1ae, 3.2);
 sun.position.set(-4, 2.4, 5);
 scene.add(sun);
 const rim = new THREE.DirectionalLight(0xc64d2b, 1.9);
 rim.position.set(3, -1.5, -3);
 scene.add(rim);
+const lightingPresets = {
+  mars: { ambient: new THREE.Color(0x938b88), sun: new THREE.Color(0xffd1ae), rim: new THREE.Color(0xc64d2b), ambientIntensity: 1.2, sunIntensity: 3.2, rimIntensity: 1.9 },
+  moon: { ambient: new THREE.Color(0x9ba9bd), sun: new THREE.Color(0xdce8ff), rim: new THREE.Color(0x7896d1), ambientIntensity: 1.2, sunIntensity: 3.2, rimIntensity: 1.5 },
+};
+let targetLighting = lightingPresets.mars;
 
 const starCount = 300;
 const starPositions = new Float32Array(starCount * 3);
@@ -214,6 +221,13 @@ function animate() {
     velocityX *= 0.94;
     velocityY *= 0.92;
   }
+  const lightBlend = 1 - Math.exp(-delta * 4);
+  ambient.color.lerp(targetLighting.ambient, lightBlend);
+  sun.color.lerp(targetLighting.sun, lightBlend);
+  rim.color.lerp(targetLighting.rim, lightBlend);
+  ambient.intensity = THREE.MathUtils.damp(ambient.intensity, targetLighting.ambientIntensity, 4, delta);
+  sun.intensity = THREE.MathUtils.damp(sun.intensity, targetLighting.sunIntensity, 4, delta);
+  rim.intensity = THREE.MathUtils.damp(rim.intensity, targetLighting.rimIntensity, 4, delta);
   for (const { marker, orbit, dots, phase, speed } of orbitMarkers) {
     const time = phase + clock.elapsedTime * speed;
     marker.position.set(
