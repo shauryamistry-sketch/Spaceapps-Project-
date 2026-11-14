@@ -71,11 +71,11 @@ const starGeometry = new THREE.BufferGeometry();
 starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
 scene.add(new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0.9 })));
 
-// Sparse dotted paths orbit with Mars and are hidden by the globe on the far side.
+// Mars's model uses Y as its polar axis, so the equatorial orbit lies in the XZ plane.
 const orbitSpecs = [
-  { radius: 1.62, tilt: 0.32, rotation: -0.2, count: 160, phase: 0.01 },
-  { radius: 1.93, tilt: -0.24, rotation: 0.27, count: 190, phase: 0.025 },
-  { radius: 2.26, tilt: 0.15, rotation: -0.11, count: 220, phase: 0.04 },
+  { radius: 1.64, flattening: 0.96, tilt: 0, rotation: 0, count: 160, phase: 0.01 },
+  { radius: 1.98, flattening: 0.9, tilt: -0.34, rotation: 0.25, count: 190, phase: 0.025 },
+  { radius: 2.32, flattening: 0.78, tilt: 0.2, rotation: -0.1, count: 220, phase: 0.04 },
 ];
 
 for (const orbit of orbitSpecs) {
@@ -84,8 +84,8 @@ for (const orbit of orbitSpecs) {
     const angle = (i / orbit.count) * Math.PI * 2 + orbit.phase;
     positions.push(
       Math.cos(angle) * orbit.radius,
-      Math.sin(angle) * orbit.radius,
-      0
+      0,
+      Math.sin(angle) * orbit.radius * orbit.flattening
     );
   }
 
