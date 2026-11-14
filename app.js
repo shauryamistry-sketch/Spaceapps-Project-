@@ -122,10 +122,16 @@ const orbitSpecs = [
   { radius: 2.12, flattening: 1, tilt: Math.PI / 2, rotation: 0.12, count: 200, phase: 0.018 },
 ];
 const moonOrbitOffsets = [
-  [0.1, 0.04, -0.12],
-  [-0.16, 0.1, 0.08],
+  [0.1, -0.06, -0.12],
+  [-0.16, -0.04, 0.08],
   [0.18, -0.08, 0.16],
-  [-0.08, 0.16, -0.1],
+  [-0.08, -0.1, -0.1],
+];
+const moonOrbitFocusOffsets = [
+  [0, 0.12, 0],
+  [0, 0.15, 0],
+  [0, 0.18, 0],
+  [0, 0.22, 0],
 ];
 const orbitMarkers = [];
 
@@ -156,6 +162,7 @@ for (const [orbitIndex, orbit] of orbitSpecs.entries()) {
   dots.rotation.set(orbit.tilt, 0, orbit.rotation);
   dots.userData.marsPosition = new THREE.Vector3();
   dots.userData.moonPosition = new THREE.Vector3(...moonOrbitOffsets[orbitIndex]);
+  dots.userData.moonFocusOffset = new THREE.Vector3(...moonOrbitFocusOffsets[orbitIndex]);
   globe.add(dots);
 
   const marker = new THREE.Mesh(
@@ -230,11 +237,13 @@ function animate() {
   rim.intensity = THREE.MathUtils.damp(rim.intensity, targetLighting.rimIntensity, 4, delta);
   for (const { marker, orbit, dots, phase, speed } of orbitMarkers) {
     const time = phase + clock.elapsedTime * speed;
+    const focusOffset = activePlanet === 'moon' ? dots.userData.moonFocusOffset : new THREE.Vector3();
     marker.position.set(
-      Math.cos(time) * orbit.radius,
+      Math.cos(time) * orbit.radius + focusOffset.x,
       0,
-      Math.sin(time) * orbit.radius * orbit.flattening
+      Math.sin(time) * orbit.radius * orbit.flattening + focusOffset.z
     );
+    marker.position.y += focusOffset.y;
     marker.position.applyEuler(new THREE.Euler(orbit.tilt, 0, orbit.rotation));
     marker.position.add(dots.position);
     marker.material.opacity = 0.35 + (Math.sin(clock.elapsedTime * 4 + time) + 1) * 0.325;
