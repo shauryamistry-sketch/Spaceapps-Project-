@@ -71,6 +71,41 @@ const starGeometry = new THREE.BufferGeometry();
 starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
 scene.add(new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0.9 })));
 
+// Sparse dotted paths orbit with Mars and are hidden by the globe on the far side.
+const orbitSpecs = [
+  { radius: 1.62, tilt: 0.32, rotation: -0.2, count: 160, phase: 0.01 },
+  { radius: 1.93, tilt: -0.24, rotation: 0.27, count: 190, phase: 0.025 },
+  { radius: 2.26, tilt: 0.15, rotation: -0.11, count: 220, phase: 0.04 },
+];
+
+for (const orbit of orbitSpecs) {
+  const positions = [];
+  for (let i = 0; i < orbit.count; i++) {
+    const angle = (i / orbit.count) * Math.PI * 2 + orbit.phase;
+    positions.push(
+      Math.cos(angle) * orbit.radius,
+      Math.sin(angle) * orbit.radius,
+      0
+    );
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  const dots = new THREE.Points(
+    geometry,
+    new THREE.PointsMaterial({
+      color: 0xc4a893,
+      size: 1.25,
+      sizeAttenuation: false,
+      transparent: true,
+      opacity: 0.48,
+      depthWrite: false,
+    })
+  );
+  dots.rotation.set(orbit.tilt, 0, orbit.rotation);
+  globe.add(dots);
+}
+
 const resize = () => {
   const { width, height } = canvas.getBoundingClientRect();
   if (!width || !height) return;
