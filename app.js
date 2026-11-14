@@ -69,7 +69,7 @@ for (let i = 0; i < starCount; i++) {
 }
 const starGeometry = new THREE.BufferGeometry();
 starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-scene.add(new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0.9 })));
+globe.add(new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0.9 })));
 
 // Mars's model uses Y as its polar axis, so the equatorial orbit lies in the XZ plane.
 const orbitSpecs = [
