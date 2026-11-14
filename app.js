@@ -78,7 +78,9 @@ const orbitSpecs = [
   { radius: 1.64, flattening: 0.96, tilt: 0, rotation: 0, count: 160, phase: 0.01 },
   { radius: 1.98, flattening: 0.9, tilt: -0.34, rotation: 0.25, count: 190, phase: 0.025 },
   { radius: 2.32, flattening: 0.78, tilt: 0.2, rotation: -0.1, count: 220, phase: 0.04 },
+  { radius: 2.12, flattening: 1, tilt: Math.PI / 2, rotation: 0.12, count: 200, phase: 0.018 },
 ];
+const orbitMarkers = [];
 
 for (const orbit of orbitSpecs) {
   const positions = [];
@@ -106,6 +108,13 @@ for (const orbit of orbitSpecs) {
   );
   dots.rotation.set(orbit.tilt, 0, orbit.rotation);
   globe.add(dots);
+
+  const marker = new THREE.Mesh(
+    new THREE.SphereGeometry(0.018, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xffc68a, transparent: true, opacity: 1 })
+  );
+  globe.add(marker);
+  orbitMarkers.push({ marker, orbit, phase: random() * Math.PI * 2, speed: 0.16 + random() * 0.1 });
 }
 
 const resize = () => {
@@ -162,6 +171,16 @@ function animate() {
     globe.rotation.x = THREE.MathUtils.clamp(globe.rotation.x + velocityY, -0.65, 0.65);
     velocityX *= 0.94;
     velocityY *= 0.92;
+  }
+  for (const { marker, orbit, phase, speed } of orbitMarkers) {
+    const time = phase + clock.elapsedTime * speed;
+    marker.position.set(
+      Math.cos(time) * orbit.radius,
+      0,
+      Math.sin(time) * orbit.radius * orbit.flattening
+    );
+    marker.position.applyEuler(new THREE.Euler(orbit.tilt, 0, orbit.rotation));
+    marker.material.opacity = 0.35 + (Math.sin(clock.elapsedTime * 4 + time) + 1) * 0.325;
   }
   camera.position.z = THREE.MathUtils.damp(camera.position.z, targetDistance, 5, delta);
   renderer.render(scene, camera);
