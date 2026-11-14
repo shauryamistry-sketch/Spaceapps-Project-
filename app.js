@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import marsModelUrl from './assets/24881_Mars_1_6792.glb?url';
+import moonModelUrl from './assets/moon.glb?url';
 
 const canvas = document.querySelector('#mars-canvas');
 const scene = new THREE.Scene();
@@ -17,36 +18,69 @@ const root = new THREE.Group();
 scene.add(root);
 const globe = new THREE.Group();
 root.add(globe);
+let activeModel = null;
+let activePlanet = 'mars';
+const planetModels = { mars: null, moon: null };
+
+function addPlanetModel(planet, model) {
+  const bounds = new THREE.Box3().setFromObject(model);
+  const center = bounds.getCenter(new THREE.Vector3());
+  const size = bounds.getSize(new THREE.Vector3());
+  const maxDimension = Math.max(size.x, size.y, size.z);
+  model.position.sub(center);
+  const displayDiameter = planet === 'moon' ? 2.55 : 2.96;
+  model.scale.setScalar(displayDiameter / maxDimension);
+  model.traverse((part) => {
+    if (!part.isMesh) return;
+    part.castShadow = false;
+    part.receiveShadow = false;
+    if (part.material) {
+      part.material.roughness = Math.max(part.material.roughness ?? 0, 0.8);
+      part.material.needsUpdate = true;
+    }
+  });
+  planetModels[planet] = model;
+  if (activePlanet === planet) {
+    if (activeModel) globe.remove(activeModel);
+    activeModel = model;
+    globe.add(activeModel);
+  }
+}
+
+function loadPlanet(planet, url) {
+  loader.load(url, ({ scene: model }) => addPlanetModel(planet, model), undefined, (error) => {
+    const label = planet === 'mars' ? 'Mars' : 'Moon';
+    canvas.insertAdjacentHTML('afterend', `<p class="load-message">Could not load the ${label} model. Check that its GLB file is present and open the site using a local web server.</p>`);
+    console.error(`${label} model failed to load:`, error);
+  });
+}
 
 let seed = 914237;
 const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
 const loader = new GLTFLoader();
-loader.load(
-  marsModelUrl,
-  ({ scene: marsModel }) => {
-    const bounds = new THREE.Box3().setFromObject(marsModel);
-    const center = bounds.getCenter(new THREE.Vector3());
-    const size = bounds.getSize(new THREE.Vector3());
-    const maxDimension = Math.max(size.x, size.y, size.z);
-    marsModel.position.sub(center);
-    marsModel.scale.setScalar(2.96 / maxDimension);
-    marsModel.traverse((part) => {
-      if (!part.isMesh) return;
-      part.castShadow = false;
-      part.receiveShadow = false;
-      if (part.material) {
-        part.material.roughness = Math.max(part.material.roughness ?? 0, 0.8);
-        part.material.needsUpdate = true;
-      }
-    });
-    globe.add(marsModel);
-  },
-  undefined,
-  (error) => {
-    document.querySelector('#mars-canvas').insertAdjacentHTML('afterend', '<p class="load-message">Could not load assets/24881_Mars_1_6792.glb. Check that the file is present and open the site using a local web server.</p>');
-    console.error('Mars model failed to load:', error);
+loadPlanet('mars', marsModelUrl);
+loadPlanet('moon', moonModelUrl);
+
+const planetButtons = document.querySelectorAll('[data-planet]');
+planetButtons.forEach((button) => button.addEventListener('click', () => {
+  const planet = button.dataset.planet;
+  activePlanet = planet;
+  for (const { dots } of orbitMarkers) {
+    dots.position.copy(planet === 'moon' ? dots.userData.moonPosition : dots.userData.marsPosition);
   }
-);
+  planetButtons.forEach((option) => {
+    const selected = option === button;
+    option.classList.toggle('is-active', selected);
+    option.setAttribute('aria-pressed', String(selected));
+  });
+  document.querySelector('main').setAttribute('aria-label', `Interactive view of ${planet === 'mars' ? 'Mars' : 'the Moon'}`);
+  canvas.setAttribute('aria-label', `${planet === 'mars' ? 'Mars' : 'The Moon'} in space. Drag to rotate and scroll to zoom.`);
+  if (planetModels[planet]) {
+    if (activeModel) globe.remove(activeModel);
+    activeModel = planetModels[planet];
+    globe.add(activeModel);
+  }
+}));
 
 scene.add(new THREE.AmbientLight(0x938b88, 1.2));
 const sun = new THREE.DirectionalLight(0xffd1ae, 3.2);
@@ -80,9 +114,15 @@ const orbitSpecs = [
   { radius: 2.32, flattening: 0.78, tilt: 0.2, rotation: -0.1, count: 220, phase: 0.04 },
   { radius: 2.12, flattening: 1, tilt: Math.PI / 2, rotation: 0.12, count: 200, phase: 0.018 },
 ];
+const moonOrbitOffsets = [
+  [0.1, 0.04, -0.12],
+  [-0.16, 0.1, 0.08],
+  [0.18, -0.08, 0.16],
+  [-0.08, 0.16, -0.1],
+];
 const orbitMarkers = [];
 
-for (const orbit of orbitSpecs) {
+for (const [orbitIndex, orbit] of orbitSpecs.entries()) {
   const positions = [];
   for (let i = 0; i < orbit.count; i++) {
     const angle = (i / orbit.count) * Math.PI * 2 + orbit.phase;
@@ -107,6 +147,8 @@ for (const orbit of orbitSpecs) {
     })
   );
   dots.rotation.set(orbit.tilt, 0, orbit.rotation);
+  dots.userData.marsPosition = new THREE.Vector3();
+  dots.userData.moonPosition = new THREE.Vector3(...moonOrbitOffsets[orbitIndex]);
   globe.add(dots);
 
   const marker = new THREE.Mesh(
@@ -114,7 +156,7 @@ for (const orbit of orbitSpecs) {
     new THREE.MeshBasicMaterial({ color: 0xffc68a, transparent: true, opacity: 1 })
   );
   globe.add(marker);
-  orbitMarkers.push({ marker, orbit, phase: random() * Math.PI * 2, speed: 0.16 + random() * 0.1 });
+  orbitMarkers.push({ marker, orbit, dots, phase: random() * Math.PI * 2, speed: 0.16 + random() * 0.1 });
 }
 
 const resize = () => {
@@ -172,7 +214,7 @@ function animate() {
     velocityX *= 0.94;
     velocityY *= 0.92;
   }
-  for (const { marker, orbit, phase, speed } of orbitMarkers) {
+  for (const { marker, orbit, dots, phase, speed } of orbitMarkers) {
     const time = phase + clock.elapsedTime * speed;
     marker.position.set(
       Math.cos(time) * orbit.radius,
@@ -180,6 +222,7 @@ function animate() {
       Math.sin(time) * orbit.radius * orbit.flattening
     );
     marker.position.applyEuler(new THREE.Euler(orbit.tilt, 0, orbit.rotation));
+    marker.position.add(dots.position);
     marker.material.opacity = 0.35 + (Math.sin(clock.elapsedTime * 4 + time) + 1) * 0.325;
   }
   camera.position.z = THREE.MathUtils.damp(camera.position.z, targetDistance, 5, delta);

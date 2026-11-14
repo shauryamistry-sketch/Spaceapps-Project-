@@ -3,8 +3,12 @@ html, body, main { width: 100%; height: 100%; margin: 0; overflow: hidden; backg
 body { min-width: 320px; }
 #mars-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
 #mars-canvas:active { cursor: grabbing; }
+.planet-switch { position: fixed; z-index: 1; top: 22px; left: 50%; display: flex; gap: 4px; padding: 4px; transform: translateX(-50%); border: 1px solid #444; border-radius: 999px; background: rgb(12 12 12 / 82%); backdrop-filter: blur(8px); }
+.planet-switch button { min-width: 82px; padding: 9px 16px; border: 0; border-radius: 999px; background: transparent; color: #aaa; font: 600 13px Arial, sans-serif; cursor: pointer; transition: color 160ms ease, background 160ms ease; }
+.planet-switch button:hover { color: #fff; }
+.planet-switch button.is-active { background: #38302b; color: #fff; }
 .controls { position: fixed; right: 22px; bottom: 22px; display: grid; gap: 8px; }
 .controls button { width: 38px; height: 38px; border: 1px solid #555; border-radius: 50%; background: #111; color: #eee; font: 22px Arial, sans-serif; cursor: pointer; }
 .controls button:hover { background: #292929; }
 .load-message { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 420px); color: #eee; text-align: center; font: 14px/1.6 Arial, sans-serif; }
-@media (max-width: 600px) { .controls { right: 14px; bottom: 14px; } }
+@media (max-width: 600px) { .controls { right: 14px; bottom: 14px; } .planet-switch { top: 14px; } }
