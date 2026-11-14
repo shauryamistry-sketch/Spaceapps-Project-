@@ -90,7 +90,7 @@ const rim = new THREE.DirectionalLight(0xc64d2b, 1.9);
 rim.position.set(3, -1.5, -3);
 scene.add(rim);
 
-const starCount = 500;
+const starCount = 300;
 const starPositions = new Float32Array(starCount * 3);
 for (let i = 0; i < starCount; i++) {
   // Keep stars in a distant shell so Mars and its orbits sit clearly in front.
