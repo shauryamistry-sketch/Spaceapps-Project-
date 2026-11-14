@@ -83,6 +83,13 @@ planetButtons.forEach((button) => button.addEventListener('click', () => {
   }
 }));
 
+// Replace these destinations with the lander pages when they are ready.
+const landerPages = { mars: 'mars-landers.html', moon: 'moon-landers.html' };
+canvas.addEventListener('planetselect', (event) => {
+  const { planet } = event.detail;
+  window.location.href = landerPages[planet];
+});
+
 const ambient = new THREE.AmbientLight(0x938b88, 1.2);
 scene.add(ambient);
 const sun = new THREE.DirectionalLight(0xffd1ae, 3.2);
@@ -185,12 +192,14 @@ document.querySelector('#zoom-out').addEventListener('click', () => zoomBy(0.55)
 canvas.addEventListener('wheel', (event) => { event.preventDefault(); zoomBy(event.deltaY * 0.006); }, { passive: false });
 
 let dragging = false;
+let pointerStart = null;
 let previousX = 0;
 let previousY = 0;
 let velocityX = 0;
 let velocityY = 0;
 canvas.addEventListener('pointerdown', (event) => {
   dragging = true;
+  pointerStart = { x: event.clientX, y: event.clientY };
   previousX = event.clientX;
   previousY = event.clientY;
   velocityX = velocityY = 0;
@@ -207,8 +216,26 @@ canvas.addEventListener('pointermove', (event) => {
   globe.rotation.y += velocityX;
   globe.rotation.x = THREE.MathUtils.clamp(globe.rotation.x + velocityY, -0.65, 0.65);
 });
-const release = () => { dragging = false; };
-canvas.addEventListener('pointerup', release);
+canvas.addEventListener('pointerup', (event) => {
+  const wasClick = pointerStart && Math.hypot(event.clientX - pointerStart.x, event.clientY - pointerStart.y) < 7;
+  dragging = false;
+  pointerStart = null;
+  if (!wasClick) return;
+
+  const bounds = canvas.getBoundingClientRect();
+  const pointer = new THREE.Vector2(
+    ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+    -((event.clientY - bounds.top) / bounds.height) * 2 + 1
+  );
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(pointer, camera);
+  const modelMeshes = [];
+  activeModel?.traverse((part) => { if (part.isMesh) modelMeshes.push(part); });
+  if (!raycaster.intersectObjects(modelMeshes, false).length) return;
+
+  canvas.dispatchEvent(new CustomEvent('planetselect', { detail: { planet: activePlanet } }));
+});
+const release = () => { dragging = false; pointerStart = null; };
 canvas.addEventListener('pointercancel', release);
 
 const clock = new THREE.Clock();
