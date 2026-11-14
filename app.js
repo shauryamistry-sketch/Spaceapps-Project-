@@ -56,10 +56,11 @@ const rim = new THREE.DirectionalLight(0xc64d2b, 1.9);
 rim.position.set(3, -1.5, -3);
 scene.add(rim);
 
-const starCount = 1800;
+const starCount = 500;
 const starPositions = new Float32Array(starCount * 3);
 for (let i = 0; i < starCount; i++) {
-  const radius = 2.8 + random() * 17;
+  // Keep stars in a distant shell so Mars and its orbits sit clearly in front.
+  const radius = 18 + random() * 24;
   const theta = random() * Math.PI * 2;
   const z = random() * 2 - 1;
   const planar = Math.sqrt(1 - z * z);
@@ -69,7 +70,8 @@ for (let i = 0; i < starCount; i++) {
 }
 const starGeometry = new THREE.BufferGeometry();
 starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-globe.add(new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.7, sizeAttenuation: false, transparent: true, opacity: 0.9 })));
+const starField = new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, sizeAttenuation: false, transparent: true, opacity: 0.78 }));
+globe.add(starField);
 
 // Mars's model uses Y as its polar axis, so the equatorial orbit lies in the XZ plane.
 const orbitSpecs = [
