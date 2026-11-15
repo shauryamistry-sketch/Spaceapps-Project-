@@ -148,12 +148,23 @@
   gap: 6px;
 }
 
+.map-marker-diagnostic {
+  padding: 6px 14px;
+  background: #0f1520;
+  border-top: 1px solid rgba(214, 173, 130, .14);
+  color: #b8a69a;
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
 .legend-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   border: 2px solid currentColor;
 }
+.map-legend-event .legend-dot { border-radius: 1px; transform: rotate(45deg); }
 
 .mars-map-container .leaflet-control-zoom,
 .mars-map-container .leaflet-control-attribution {

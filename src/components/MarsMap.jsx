@@ -5,7 +5,8 @@ import 'leaflet/dist/leaflet.css';
 import './MarsMap.css';
 
 import { MAP_WIDTH, MAP_HEIGHT, getMapBounds, getInitialCenter } from '../utils/marsCoordinates';
-import LandingMarkers from './LandingMarkers';
+import LandingMarkers, { isDisplayableSurfaceMarker } from './LandingMarkers';
+import { MISSION_COLORS } from '../utils/missionColors';
 
 // Image URL — uses the original mars-base_4k.jpg copied to public/images/
 const MARS_IMAGE_URL = `${import.meta.env.BASE_URL}images/mars-base_4k.jpg`;
@@ -20,11 +21,21 @@ const MARS_IMAGE_URL = `${import.meta.env.BASE_URL}images/mars-base_4k.jpg`;
  * Integration contract (Person 3):
  *   <MarsMap missions={surfaceMissions} onSelectMission={(m) => setSelected(m)} />
  */
-export default function MarsMap({ missions = [], onSelectMission, selectedId }) {
+export default function MarsMap({
+  missions = [],
+  onSelectMission,
+  selectedId,
+  imageUrl = MARS_IMAGE_URL,
+  mapTitle = 'MARS SURFACE MAP',
+  attribution = 'Mars surface map',
+  loadingLabel = 'Mars surface',
+  showSurfaceEvents = false,
+}) {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const bounds = getMapBounds();
+  const eligibleMarkerCount = missions.filter(isDisplayableSurfaceMarker).length;
   // Initial center: equator / prime meridian in CRS.Simple coords
   const center = getInitialCenter();
 
@@ -36,14 +47,16 @@ export default function MarsMap({ missions = [], onSelectMission, selectedId }) 
     const img = new Image();
     img.onload  = handleImageLoad;
     img.onerror = handleImageError;
-    img.src = MARS_IMAGE_URL;
-  }, [handleImageLoad, handleImageError]);
+    setImageError(false);
+    setImageLoaded(false);
+    img.src = imageUrl;
+  }, [imageUrl, handleImageLoad, handleImageError]);
 
   if (imageError) {
     return (
       <div className="mars-map-wrapper">
         <div className="map-error">
-          ⚠ Mars surface image could not be loaded ({MARS_IMAGE_URL})
+          ⚠ {loadingLabel} image could not be loaded ({imageUrl})
         </div>
       </div>
     );
@@ -54,13 +67,13 @@ export default function MarsMap({ missions = [], onSelectMission, selectedId }) 
       {/* Header bar */}
       <div className="map-header">
         <div className="map-header-dot" />
-        <span className="map-header-title">Mars Surface Map — Equirectangular Projection (assumed)</span>
+        <span className="map-header-title">{mapTitle}</span>
       </div>
 
       {/* Leaflet map */}
-      <div className="mars-map-container">
+      <div className="mars-map-container" data-marker-input-count={missions.length} data-marker-count={eligibleMarkerCount}>
         {!imageLoaded && (
-          <div className="map-loading">Loading Mars surface…</div>
+          <div className="map-loading">Loading {loadingLabel}…</div>
         )}
         {imageLoaded && (
           <MapContainer
@@ -80,9 +93,9 @@ export default function MarsMap({ missions = [], onSelectMission, selectedId }) 
             zoomDelta={0.5}
           >
             <ImageOverlay
-              url={MARS_IMAGE_URL}
+              url={imageUrl}
               bounds={bounds}
-              attribution='Mars surface image — NASA/USGS'
+              attribution={attribution}
             />
 
             <LandingMarkers
@@ -94,20 +107,30 @@ export default function MarsMap({ missions = [], onSelectMission, selectedId }) 
         )}
       </div>
 
+      <div className="map-marker-diagnostic" aria-live="polite">
+        {eligibleMarkerCount} verified surface marker{eligibleMarkerCount === 1 ? '' : 's'} rendered from {missions.length} mission{missions.length === 1 ? '' : 's'}
+      </div>
+
       {/* Legend */}
       <div className="map-legend">
-        <div className="map-legend-item" style={{ color: '#39ff14' }}>
+        <div className="map-legend-item" style={{ color: MISSION_COLORS.nasa }}>
           <div className="legend-dot" />
           <span>NASA — Successful</span>
         </div>
-        <div className="map-legend-item" style={{ color: '#ff9933' }}>
+        <div className="map-legend-item" style={{ color: MISSION_COLORS.isro }}>
           <div className="legend-dot" />
           <span>ISRO — Successful</span>
         </div>
-        <div className="map-legend-item" style={{ color: '#00d4ff' }}>
+        <div className="map-legend-item" style={{ color: MISSION_COLORS.operational }}>
           <div className="legend-dot" />
           <span>Operational</span>
         </div>
+        {showSurfaceEvents && (
+          <div className="map-legend-item map-legend-event" style={{ color: MISSION_COLORS.isro }}>
+            <div className="legend-dot" />
+            <span>Approximate impact / crash site</span>
+          </div>
+        )}
       </div>
     </div>
   );
