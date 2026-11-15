@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url'
 const root = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/Spaceapps-Project-/' : '/',
+  // Vercel serves this site from the domain root; GitHub Pages serves it from
+  // the repository subpath.
+  base: process.env.VERCEL ? '/' : command === 'build' ? '/Spaceapps-Project-/' : '/',
   plugins: [react()],
   build: {
     rollupOptions: {

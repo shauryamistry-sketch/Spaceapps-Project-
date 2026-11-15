@@ -21,4 +21,11 @@ mission without a sourced profile is shown without a path.
 ## Production build
 
 Run `npm run build`. The generated site is written to `dist/` and is configured
-for the repository's GitHub Pages path in `vite.config.js`.
+for the repository's GitHub Pages path in `vite.config.js`. Vercel builds use
+the domain root automatically.
+
+## Deploy to Vercel
+
+Import this GitHub repository in Vercel and deploy it. The Vercel project
+settings are in `vercel.json`; Vercel installs the npm dependencies, runs the
+production build, and publishes `dist/`.
