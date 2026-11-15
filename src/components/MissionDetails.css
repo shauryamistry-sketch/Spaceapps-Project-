@@ -53,19 +53,9 @@
   font-weight: bold;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+  border: 1px solid currentColor;
 }
 
-.agency-badge.nasa {
-  background: rgba(26, 115, 232, 0.15);
-  border: 1px solid #1a73e8;
-  color: #1a73e8;
-}
-
-.agency-badge.isro {
-  background: rgba(255, 153, 51, 0.15);
-  border: 1px solid #ff9933;
-  color: #ff9933;
-}
 
 /* Body */
 .mission-details-body {
@@ -243,8 +233,6 @@
 .mission-details-header { padding: 13px 16px; background: rgba(23, 19, 25, .38); border-bottom-color: rgba(214, 173, 130, .16); }
 .mission-details-title { color: #b8a69a; font-size: 9px; letter-spacing: .16em; }
 .agency-badge { padding: 4px 9px; font-size: 8px; letter-spacing: .12em; }
-.agency-badge.nasa { background: rgba(0, 212, 255, .08); border-color: rgba(0, 212, 255, .42); color: #00d4ff; }
-.agency-badge.isro { background: rgba(255, 153, 51, .08); border-color: rgba(255, 153, 51, .42); color: #ff9933; }
 .mission-details-body { padding: 17px; }
 .mission-details-empty { min-height: 215px; padding: 30px 24px; color: #b8a69a; font-family: inherit; font-size: 11px; letter-spacing: .04em; line-height: 1.6; }
 .mission-details-empty svg { opacity: .54; }
@@ -273,3 +261,15 @@
 .mangalyaan-badge { color: #d6ad82; font-size: 8px; letter-spacing: .1em; }
 .mangalyaan-fact { color: #c9a98f; font-size: 9px; }
 .mangalyaan-fact strong { color: #ff9933; }
+
+.crew-status-badge { display: inline-flex; align-items: center; border: 1px solid rgba(156, 200, 232, .4); border-radius: 5px; padding: 4px 8px; background: rgba(156, 200, 232, .08); color: #c7e5f8; font-size: 8px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.crew-manned { border-color: rgba(255, 153, 51, .42); background: rgba(255, 153, 51, .08); color: #ffb56f; }
+.mission-year { margin: -7px 0 12px; color: var(--muted, #b8a69a); font-size: 9px; letter-spacing: .06em; }
+.mission-achievements { margin: 0; padding-left: 17px; color: #c7b8ad; font-size: 10px; line-height: 1.6; }
+.mission-achievement-list { display: grid; gap: 7px; }
+.mission-achievement { padding: 8px 9px; border: 1px solid rgba(214, 173, 130, .16); border-radius: 6px; background: rgba(23, 19, 25, .35); }
+.mission-achievement strong, .mission-achievement span, .mission-achievement small { display: block; }
+.mission-achievement strong { color: #f4e8dd; font-size: 10px; }
+.mission-achievement span { color: #ff9933; margin-top: 2px; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.mission-achievement p { margin: 5px 0; color: #c7b8ad; font-size: 10px; line-height: 1.45; }
+.mission-achievement small { color: #b8a69a; font-size: 9px; line-height: 1.35; }
