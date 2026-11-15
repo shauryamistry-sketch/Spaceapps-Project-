@@ -1,0 +1,29 @@
+.orbital-panel { position: fixed; z-index: 2; left: 18px; top: 84px; bottom: 22px; width: clamp(220px, 24vw, 330px); display: flex; flex-direction: column; padding: 18px; border: 1px solid #493b33; border-radius: 14px; background: rgba(15, 14, 15, .94); color: #e8ddd6; font: 13px/1.5 Arial, sans-serif; }
+.orbital-panel h2 { font-size: 19px; margin: 0; }
+.orbital-panel .orbital-count { color: #a89a90; font-size: 11px; }
+.orbital-panel .orbital-list { flex: 1; min-height: 100px; overflow-y: auto; }
+.orbital-panel .orbital-list, .orbital-panel .orbital-details { overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #79604e #171517; }
+.orbital-panel button { display: block; width: 100%; text-align: left; padding: 12px; margin-bottom: 6px; border: 1px solid #39302b; border-radius: 7px; background: #1a1717; color: inherit; cursor: pointer; transition: background .16s, border-color .16s; }
+.orbital-panel button span { display: block; color: #b4a59b; font-size: 11px; margin-top: 4px; }
+.orbital-panel button:hover, .orbital-panel button[aria-pressed=true] { background: #37261e; border-color: #c68558; }
+.orbital-panel button:focus-visible { outline: 2px solid #ffc68a; outline-offset: -2px; }
+.orbital-panel .orbital-details { max-height: 42%; overflow-y: auto; border-top: 1px solid #493b33; margin-top: 12px; }
+.orbital-panel .orbital-details h3 { font-size: 15px; }
+.orbital-panel a { color: #ffc68a; }
+.orbital-panel figure { margin: 0 0 14px; }
+.orbital-panel figure img { display: block; width: 100%; height: 150px; object-fit: contain; border-radius: 8px; background: #08090b; }
+.orbital-panel figure img[hidden] { display: none; }
+.orbital-panel figcaption { font-size: 10px; line-height: 1.4; opacity: .75; margin-top: 6px; }
+.orbital-panel[data-theme="moon"] { background: rgba(14, 19, 27, .96); color: #e2e9f2; border-color: #43536a; }
+.orbital-panel[data-theme="moon"] .orbital-count, .orbital-panel[data-theme="moon"] button span { color: #a6b7ca; }
+.orbital-panel[data-theme="moon"] button { background: #1a2330; border-color: #354559; }
+.orbital-panel[data-theme="moon"] button:hover, .orbital-panel[data-theme="moon"] button[aria-pressed=true] { background: #304158; border-color: #a6c5e5; }
+.orbital-panel[data-theme="moon"] button:focus-visible { outline-color: #c5dff7; }
+.orbital-panel[data-theme="moon"] a { color: #c5dff7; }
+.orbital-panel[data-theme="moon"] .orbital-details { border-color: #43536a; }
+.orbital-panel[data-theme="moon"] .orbital-list, .orbital-panel[data-theme="moon"] .orbital-details { scrollbar-color: #7791af #17202c; }
+main[data-theme="moon"] > .planet-switch { background: rgba(14, 19, 27, .92); border-color: #43536a; }
+main[data-theme="moon"] > .planet-switch button.is-active { background: #304158; color: #e2e9f2; }
+main[data-theme="moon"] > .controls button { background: #1a2330; border-color: #7791af; color: #e2e9f2; }
+main[data-theme="moon"] > .controls button:hover { background: #304158; }
+@media (max-width: 700px) { .orbital-panel { top: auto; bottom: 12px; left: 12px; width: calc(100% - 76px); height: 32vh; padding: 10px; } .orbital-panel h2 { font-size: 15px; } .orbital-panel .orbital-count { margin: 4px 0; } .orbital-panel .orbital-list { min-height: 45px; } }

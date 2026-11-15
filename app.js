@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import marsModelUrl from './assets/24881_Mars_1_6792.glb?url';
 import moonModelUrl from './assets/moon.glb?url';
+import { createOrbitalPanel } from './orbital-panel.js';
+
+const orbitalPanel = createOrbitalPanel(document.querySelector('main'));
 
 const canvas = document.querySelector('#mars-canvas');
 const scene = new THREE.Scene();
@@ -78,6 +81,7 @@ canvas.setAttribute('aria-label', `${initialPlanetName} in space. Drag to rotate
 planetButtons.forEach((button) => button.addEventListener('click', () => {
   const planet = button.dataset.planet;
   activePlanet = planet;
+  orbitalPanel.setPlanet(planet);
   for (const { dots } of orbitMarkers) {
     dots.position.copy(planet === 'moon' ? dots.userData.moonPosition : dots.userData.marsPosition);
   }
