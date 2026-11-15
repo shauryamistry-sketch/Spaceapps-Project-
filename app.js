@@ -61,7 +61,10 @@ const loader = new GLTFLoader();
 loadPlanet('mars', marsModelUrl);
 loadPlanet('moon', moonModelUrl);
 
-const landerPages = { mars: 'mars-landers.html' };
+const landerPages = {
+  mars: `${import.meta.env.BASE_URL}mars-landers.html?planet=mars`,
+  moon: `${import.meta.env.BASE_URL}mars-landers.html?planet=moon`,
+};
 const planetButtons = document.querySelectorAll('[data-planet]');
 planetButtons.forEach((button) => button.addEventListener('click', () => {
   const planet = button.dataset.planet;
