@@ -19,7 +19,8 @@ scene.add(root);
 const globe = new THREE.Group();
 root.add(globe);
 let activeModel = null;
-let activePlanet = 'mars';
+const requestedPlanet = new URLSearchParams(window.location.search).get('planet');
+let activePlanet = requestedPlanet === 'moon' ? 'moon' : 'mars';
 const planetModels = { mars: null, moon: null };
 
 function addPlanetModel(planet, model) {
@@ -66,6 +67,14 @@ const landerPages = {
   moon: `${import.meta.env.BASE_URL}mars-landers.html?planet=moon`,
 };
 const planetButtons = document.querySelectorAll('[data-planet]');
+planetButtons.forEach((button) => {
+  const selected = button.dataset.planet === activePlanet;
+  button.classList.toggle('is-active', selected);
+  button.setAttribute('aria-pressed', String(selected));
+});
+const initialPlanetName = activePlanet === 'mars' ? 'Mars' : 'the Moon';
+document.querySelector('main').setAttribute('aria-label', `Interactive view of ${initialPlanetName}`);
+canvas.setAttribute('aria-label', `${initialPlanetName} in space. Drag to rotate and scroll to zoom.`);
 planetButtons.forEach((button) => button.addEventListener('click', () => {
   const planet = button.dataset.planet;
   activePlanet = planet;
@@ -105,7 +114,7 @@ const lightingPresets = {
   mars: { ambient: new THREE.Color(0x938b88), sun: new THREE.Color(0xffd1ae), rim: new THREE.Color(0xc64d2b), ambientIntensity: 1.2, sunIntensity: 3.2, rimIntensity: 1.9 },
   moon: { ambient: new THREE.Color(0x9ba9bd), sun: new THREE.Color(0xdce8ff), rim: new THREE.Color(0x7896d1), ambientIntensity: 1.2, sunIntensity: 3.2, rimIntensity: 1.5 },
 };
-let targetLighting = lightingPresets.mars;
+let targetLighting = lightingPresets[activePlanet];
 
 const starCount = 300;
 const starPositions = new Float32Array(starCount * 3);

@@ -54,9 +54,9 @@ export default function App() {
     ))
     : activeMissions;
   const landableMissions = (isMoon ? filteredMissions : surfaceMissions).filter(isConfirmedSurfaceLanding);
-  const totalNASA = activeMissions.filter((mission) => mission.agency === 'NASA').length;
-  const totalISRO = activeMissions.filter((mission) => mission.agency === 'ISRO').length;
   const featuredDiscoveries = isMoon ? filteredMissions : landableMissions;
+  const totalNASA = featuredDiscoveries.filter((mission) => mission.agency === 'NASA').length;
+  const totalISRO = activeMissions.filter((mission) => mission.agency === 'ISRO').length;
   const planetName = isMoon ? 'Moon' : 'Mars';
   const switchPlanet = (planet) => {
     setActivePlanet(planet);
@@ -78,7 +78,7 @@ export default function App() {
           </span>
         </a>
         <nav className="header-nav" aria-label="Page sections">
-          <a href="./index.html">← Back to the globes</a>
+          <a href={`${import.meta.env.BASE_URL}index.html?planet=${activePlanet}`}>← Back to the globes</a>
           <a href="#surface-map">Surface map</a>
           <a href="#mission-image">Mission image</a>
           <a href="#discoveries">Discoveries</a>
@@ -88,9 +88,8 @@ export default function App() {
           <button className={isMoon ? 'is-active' : ''} type="button" onClick={() => switchPlanet('moon')}>Moon</button>
         </div>
         <div className="app-header-stats" aria-label="Mission statistics">
-          <div className="stat-chip"><span className="stat-num">{activeMissions.length}</span><span className="stat-label">Missions</span></div>
           <div className="stat-chip nasa"><span className="stat-num">{totalNASA}</span><span className="stat-label">NASA</span></div>
-          <div className="stat-chip isro"><span className="stat-num">{totalISRO}</span><span className="stat-label">ISRO</span></div>
+          {isMoon && <div className="stat-chip isro"><span className="stat-num">{totalISRO}</span><span className="stat-label">ISRO</span></div>}
           <div className="stat-chip surface"><span className="stat-num">{landableMissions.length}</span><span className="stat-label">Landings</span></div>
         </div>
       </header>
