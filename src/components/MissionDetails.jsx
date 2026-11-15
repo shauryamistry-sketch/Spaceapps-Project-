@@ -1,5 +1,6 @@
 import React from 'react';
 import './MissionDetails.css';
+import { getMissionColor } from '../utils/missionColors';
 
 /**
  * MissionDetails
@@ -46,13 +47,16 @@ export default function MissionDetails({ mission }) {
     return `${latitudeLabel}, ${longitudeLabel}`;
   };
   const coordinates = formatCoordinates();
+  const surfaceEventCoordinates = mission.surfaceEvent
+    ? `${Math.abs(mission.surfaceEvent.latitude).toFixed(4)}°${mission.surfaceEvent.latitude < 0 ? 'S' : 'N'}, ${Math.abs(mission.surfaceEvent.longitude).toFixed(4)}°${mission.surfaceEvent.longitude < 0 ? 'W' : 'E'}`
+    : null;
 
   return (
     <div className="mission-details-panel">
       {/* Panel header */}
       <div className="mission-details-header">
         <span className="mission-details-title">Mission Profile</span>
-        <span className={`agency-badge ${mission.agency?.toLowerCase() ?? 'nasa'}`}>
+        <span className={`agency-badge ${mission.agency?.toLowerCase() ?? 'nasa'}`} style={{ color: getMissionColor(mission), borderColor: getMissionColor(mission), backgroundColor: `${getMissionColor(mission)}14` }}>
           {mission.agency}
         </span>
       </div>
@@ -69,7 +73,14 @@ export default function MissionDetails({ mission }) {
           {mission.status && (
             <span className={statusClass}>{mission.status.replace(/-/g, ' ')}</span>
           )}
+          {mission.crewStatus && (
+            <span className={`crew-status-badge crew-${mission.crewStatus.toLowerCase()}`}>{mission.crewStatus}</span>
+          )}
         </div>
+
+        {mission.launchYear && <div className="mission-year">Launch year · {mission.launchYear}</div>}
+
+        {mission.surfaceCategory && <div className="mission-year">Surface category · {mission.surfaceCategory}</div>}
 
         {/* Key facts grid */}
         <div className="mission-info-grid">
@@ -85,10 +96,29 @@ export default function MissionDetails({ mission }) {
               <div className="info-cell-value coord">{coordinates}</div>
             </div>
           )}
+          {mission.surfaceEvent && (
+            <div className="info-cell mission-pair-cell">
+              <div className="info-cell-label">Surface Event</div>
+              <div className="info-cell-value">{mission.surfaceEvent.label} · {surfaceEventCoordinates}</div>
+              <div className="info-cell-label">{mission.surfaceEvent.coordinatePrecision}</div>
+            </div>
+          )}
           {mission.launchDate && (
             <div className="info-cell">
               <div className="info-cell-label">Launch Date</div>
               <div className="info-cell-value">{mission.launchDate}</div>
+            </div>
+          )}
+          {mission.country && (
+            <div className="info-cell">
+              <div className="info-cell-label">Country</div>
+              <div className="info-cell-value">{mission.country}</div>
+            </div>
+          )}
+          {mission.endDate && (
+            <div className="info-cell">
+              <div className="info-cell-label">Mission End</div>
+              <div className="info-cell-value">{mission.endDate}</div>
             </div>
           )}
           {mission.arrivalDate && (
@@ -118,6 +148,26 @@ export default function MissionDetails({ mission }) {
             <div className="mission-objective">{mission.objective}</div>
           </>
         )}
+        {mission.outcome && (
+          <>
+            <div className="section-label">Mission Outcome</div>
+            <div className="mission-description">{mission.outcome}</div>
+          </>
+        )}
+        {mission.scientificAchievements?.length > 0 && (
+          <>
+            <div className="section-label">Scientific Achievements</div>
+            <div className="mission-achievement-list">{mission.scientificAchievements.map((item) => <article className="mission-achievement" key={item.title}><strong>{item.title}</strong><span>{item.instrument}</span><p>{item.observation}</p><small>{item.significance}</small></article>)}</div>
+          </>
+        )}
+        {mission.achievements?.length > 0 && (
+          <>
+            <div className="section-label">Scientific Achievements</div>
+            <ul className="mission-achievements">{mission.achievements.map((item) => <li key={item}>{item}</li>)}</ul>
+          </>
+        )}
+        {mission.missionTimeline?.length > 0 && <><div className="section-label">Mission Timeline</div><ul className="mission-achievements">{mission.missionTimeline.map((item) => <li key={item}>{item}</li>)}</ul></>}
+        {mission.spacecraftComponents?.length > 0 && <><div className="section-label">Spacecraft Components</div><div className="mission-description">{mission.spacecraftComponents.join(' · ')}</div></>}
 
         {/* Description */}
         {mission.description && (
@@ -154,6 +204,10 @@ export default function MissionDetails({ mission }) {
             ↗ Official Mission Source
           </a>
         )}
+        {mission.sourceUrl && (
+          <a href={mission.sourceUrl} target="_blank" rel="noopener noreferrer" className="mission-source">↗ Official mission source</a>
+        )}
+        {mission.image && mission.imageNasaId && <a className="mission-source" href={`https://images.nasa.gov/details/${mission.imageNasaId}`} target="_blank" rel="noopener noreferrer">↗ NASA image record · {mission.imageNasaId}</a>}
       </div>
     </div>
   );

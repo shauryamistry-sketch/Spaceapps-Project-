@@ -7,6 +7,42 @@
   background: var(--bg-primary, #0a0d14);
 }
 
+/* Lunar companion view: it inherits the same layout while replacing warm Mars
+   hues with a restrained graphite, silver and ice-blue palette. */
+.app-shell.planet-moon {
+  --page: #121317;
+  --panel: #24262d;
+  --panel-raised: #30333a;
+  --rust: #3f434d;
+  --mars: #747986;
+  --orange: #c8ccd4;
+  --green: #dce0e8;
+  --blue: #9cc8e8;
+  --sand: #d9dce2;
+  --ink: #f2f4f7;
+  --muted: #aeb4c0;
+  --line: rgba(217, 220, 226, .18);
+  --mars-gradient: linear-gradient(135deg, #555a65 0%, #949aa6 45%, #d9dce2 100%);
+  background:
+    radial-gradient(ellipse at 77% 0%, rgba(156, 200, 232, .1), transparent 37rem),
+    radial-gradient(ellipse at 0% 47%, rgba(135, 142, 157, .11), transparent 36rem),
+    var(--page);
+}
+
+.planet-switch { display: inline-flex; gap: 3px; padding: 3px; border: 1px solid var(--line); border-radius: 8px; background: rgba(41, 37, 42, .58); }
+.planet-switch button { padding: 6px 10px; border: 0; border-radius: 5px; color: var(--muted); background: transparent; font: 600 9px/1 Inter, "Aptos", "Segoe UI", sans-serif; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; transition: color .2s ease, background .2s ease; }
+.planet-switch button:hover { color: var(--ink); }
+.planet-switch button.is-active { color: var(--ink); background: var(--mars-gradient); box-shadow: 0 2px 8px rgba(0,0,0,.24); }
+.planet-moon .logo-mars { border-color: rgba(217, 220, 226, .6); background: radial-gradient(circle at 37% 32%, #f0f2f5 0 7%, #a6abb5 34%, #5f6571 72%, #2c3038 100%); box-shadow: 0 0 22px rgba(174, 180, 192, .17), inset -7px -5px 13px rgba(15, 16, 20, .65); }
+.planet-moon .discovery-list { scrollbar-color: #aeb4c0 rgba(41, 37, 42, .7); }
+.planet-moon .discovery-list::-webkit-scrollbar-thumb { background: linear-gradient(#707784, #b9bec8, #9cc8e8); }
+.planet-moon .discovery-card.is-selected { background: linear-gradient(110deg, rgba(116, 121, 134, .35), rgba(36, 38, 45, .9) 64%); border-color: rgba(217, 220, 226, .55); box-shadow: inset 3px 0 #dce0e8; }
+.planet-moon .discovery-art, .planet-moon .discovery-art-2, .planet-moon .discovery-art-3 { background-image: linear-gradient(145deg, rgba(20, 22, 27, .32), rgba(178, 183, 193, .1)), url('/images/moon-map.jpg'); background-size: cover, 230px auto; filter: grayscale(.84); }
+
+.crew-filters { display: flex; gap: 6px; margin-bottom: 10px; }
+.crew-filters button { padding: 6px 9px; border: 1px solid var(--line); border-radius: 5px; background: rgba(23, 19, 25, .5); color: var(--muted); font-size: 9px; cursor: pointer; }
+.crew-filters button.is-active { color: var(--ink); border-color: rgba(156, 200, 232, .55); background: rgba(156, 200, 232, .12); }
+
 /* ── Header ── */
 .app-header {
   display: flex;
@@ -59,8 +95,8 @@
   min-width: 56px;
 }
 
-.stat-chip.nasa { border-color: rgba(26, 115, 232, 0.4); }
-.stat-chip.isro { border-color: rgba(255, 153, 51, 0.4); }
+.stat-chip.nasa { border-color: var(--mission-nasa-color, #39ff14); }
+.stat-chip.isro { border-color: var(--mission-isro-color, #ff9933); }
 
 .stat-num {
   font-size: 15px;
@@ -69,8 +105,8 @@
   line-height: 1.2;
 }
 
-.stat-chip.nasa .stat-num { color: #1a73e8; }
-.stat-chip.isro .stat-num { color: #ff9933; }
+.stat-chip.nasa .stat-num { color: var(--mission-nasa-color, #39ff14); }
+.stat-chip.isro .stat-num { color: var(--mission-isro-color, #ff9933); }
 
 .stat-label {
   font-size: 8px;
@@ -213,7 +249,7 @@
   position: relative;
   z-index: 500;
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) auto minmax(330px, 1fr);
+  grid-template-columns: minmax(230px, 1fr) auto auto minmax(300px, 1fr);
   gap: 28px;
   align-items: center;
   padding: 18px clamp(20px, 4.2vw, 68px);
@@ -255,8 +291,8 @@
 .stat-chip { min-width: 66px; padding: 6px 10px; background: rgba(41, 37, 42, .78); border-color: var(--line); border-radius: 8px; }
 .stat-chip.nasa, .stat-chip.isro { border-color: var(--line); }
 .stat-num { color: var(--blue); font-size: 14px; font-weight: 600; }
-.stat-chip.nasa .stat-num { color: var(--blue); }
-.stat-chip.isro .stat-num { color: var(--orange); }
+.stat-chip.nasa .stat-num { color: var(--mission-nasa-color, #39ff14); }
+.stat-chip.isro .stat-num { color: var(--mission-isro-color, #ff9933); }
 .stat-chip.surface .stat-num { color: var(--green); }
 .stat-label { color: var(--muted); font-size: 8px; letter-spacing: .12em; }
 
@@ -291,8 +327,8 @@
 .mars-map-container .leaflet-popup-content-wrapper { background: #29252a; color: var(--ink); border-color: rgba(214, 173, 130, .22); font-family: Inter, "Aptos", "Segoe UI", sans-serif; }
 .mars-map-container .leaflet-popup-tip { background: #29252a; }
 .map-popup-name { color: var(--blue); font-family: Georgia, "Times New Roman", serif; font-size: 15px; font-weight: 400; }
-.map-popup-agency.nasa { color: var(--blue); }
-.map-popup-agency.isro { color: var(--orange); }
+.map-popup-agency.nasa { color: var(--mission-nasa-color, #39ff14); }
+.map-popup-agency.isro { color: var(--mission-isro-color, #ff9933); }
 .map-popup-site { color: var(--muted); }
 .map-popup-btn { border-color: var(--orange); color: var(--ink); font-family: inherit; border-radius: 5px; }
 .map-popup-btn:hover { background: var(--mars-gradient); }
@@ -347,6 +383,10 @@
 .discovery-meta i { display: inline-block; width: 3px; height: 3px; margin: 0 4px 2px; border-radius: 50%; background: var(--orange); }
 .discovery-copy strong { overflow: hidden; color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 13px; font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
 .discovery-copy > span:last-child { display: -webkit-box; overflow: hidden; color: var(--muted); font-size: 9px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.discovery-filters { margin-top: -5px; }
+.moon-filter-groups { display: flex; flex-wrap: wrap; gap: 7px 14px; margin-top: -5px; }
+.moon-filter-groups .discovery-filters { margin-top: 0; }
+.discovery-crew-badge { width: max-content; padding: 2px 5px; font-size: 7px; line-height: 1; }
 .discovery-arrow { color: var(--blue); font-size: 14px; transition: transform .2s ease; }
 .discovery-card:hover .discovery-arrow { transform: translate(2px, -2px); }
 
@@ -358,8 +398,8 @@
 .mission-details-header { padding: 13px 16px; background: rgba(23, 19, 25, .38); border-bottom-color: var(--line); }
 .mission-details-title { color: var(--muted); font-size: 9px; letter-spacing: .16em; }
 .agency-badge { padding: 4px 9px; font-size: 8px; letter-spacing: .12em; }
-.agency-badge.nasa { background: rgba(0, 212, 255, .08); border-color: rgba(0, 212, 255, .42); color: var(--blue); }
-.agency-badge.isro { background: rgba(255, 153, 51, .08); border-color: rgba(255, 153, 51, .42); color: var(--orange); }
+.agency-badge.nasa { color: var(--mission-nasa-color, #39ff14); }
+.agency-badge.isro { color: var(--mission-isro-color, #ff9933); }
 .mission-details-body { padding: 17px; }
 .mission-details-empty { min-height: 215px; padding: 30px 24px; color: var(--muted); font-family: inherit; font-size: 11px; letter-spacing: .04em; line-height: 1.6; }
 .mission-details-empty svg { opacity: .54; }

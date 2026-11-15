@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { Marker, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import { latLonToMapCoordinates } from '../utils/marsCoordinates';
+import { getMissionColor } from '../utils/missionColors';
 
 /**
  * Returns marker colour based on mission status and agency.
@@ -9,26 +10,25 @@ import { latLonToMapCoordinates } from '../utils/marsCoordinates';
  * Successful NASA missions get green.
  * ISRO would get saffron (not on surface — Mangalyaan was an orbiter, excluded here).
  */
-function getMarkerColor(mission) {
-  if (!mission) return '#39FF14';
-  if (mission.status === 'operational') return '#00D4FF';
-  if (mission.agency === 'ISRO') return '#FF9933';
-  return '#39FF14';
-}
-
 /**
  * Creates a custom SVG circular marker icon.
  */
-function createMarkerIcon(mission, isSelected) {
-  const color = getMarkerColor(mission);
-  const size = isSelected ? 20 : 14;
-  const outerRing = isSelected ? '<circle cx="10" cy="10" r="9" fill="none" stroke="#FF9933" stroke-width="1.5" opacity="0.8"/>' : '';
-  const glow = isSelected ? ' style="filter: drop-shadow(0 0 4px rgba(255,153,51,.72))"' : '';
+function createMarkerIcon(mission, isSelected, overlapOffset) {
+  const color = getMissionColor(mission);
+  const isSurfaceEvent = Boolean(mission.surfaceEvent);
+  const size = 36;
+  const [offsetX, offsetY] = overlapOffset;
+  const outerRing = isSelected ? `<circle cx="18" cy="18" r="9" fill="none" stroke="${color}" stroke-width="1.5" opacity="0.9"/>` : '';
+  const glow = isSelected ? ' style="filter: drop-shadow(0 0 4px currentColor)"' : '';
 
   const svgString = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${isSelected ? 20 : 14}" height="${isSelected ? 20 : 14}" viewBox="0 0 20 20"${glow}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 36 36"${glow}>
+      <g transform="translate(${offsetX} ${offsetY})">
       ${outerRing}
-      <circle cx="10" cy="10" r="5" fill="${color}" stroke="#000" stroke-width="1.5"/>
+      ${isSurfaceEvent
+        ? `<rect x="13.5" y="13.5" width="9" height="9" rx="1" fill="${color}" stroke="#0f1116" stroke-width="1.5" transform="rotate(45 18 18)"/>`
+        : `<circle cx="18" cy="18" r="5" fill="${color}" stroke="#0f1116" stroke-width="1.5"/>`}
+      </g>
     </svg>
   `;
 
@@ -54,17 +54,60 @@ function createMarkerIcon(mission, isSelected) {
  * are excluded even when they have an estimated or attempted location.
  */
 export function isConfirmedSurfaceLanding(mission) {
-  const surfaceType = ['lander', 'lander-rover', 'rover', 'helicopter'].includes(
+  const surfaceType = ['lander', 'lander-rover', 'crewed-lander', 'rover', 'helicopter'].includes(
     String(mission?.type ?? mission?.category ?? '').toLowerCase()
   );
   const confirmedStatus = ['successful', 'operational', 'completed'].includes(mission?.status);
   return surfaceType
     && confirmedStatus
-    && Boolean(mission?.landingDate)
     && Number.isFinite(mission?.latitude)
     && Number.isFinite(mission?.longitude)
     && mission.latitude >= -90
     && mission.latitude <= 90;
+}
+
+export function isVerifiedSurfaceEvent(mission) {
+  const event = mission?.surfaceEvent;
+  return Boolean(event)
+    && ['controlled-impact', 'crash-site'].includes(event.type)
+    && Number.isFinite(event.latitude)
+    && Number.isFinite(event.longitude)
+    && event.latitude >= -90
+    && event.latitude <= 90;
+}
+
+export function isDisplayableSurfaceMarker(mission) {
+  return isConfirmedSurfaceLanding(mission) || isVerifiedSurfaceEvent(mission);
+}
+
+function getMarkerCoordinates(mission) {
+  if (isVerifiedSurfaceEvent(mission)) {
+    return [mission.surfaceEvent.latitude, mission.surfaceEvent.longitude];
+  }
+  return [mission.latitude, mission.longitude];
+}
+
+function getOverlapOffsets(missions) {
+  const offsets = new Map();
+  const groups = new Map();
+  const offsetPattern = [[0, 0], [7, -7], [-7, 7], [7, 7], [-7, -7]];
+
+  missions.forEach((mission) => {
+    const [latitude, longitude] = getMarkerCoordinates(mission);
+    const [y, x] = latLonToMapCoordinates(latitude, longitude);
+    // Group nearby sites only for presentation. The marker's Leaflet position
+    // continues to use the source coordinate exactly.
+    const groupKey = `${Math.round(x / 8)}:${Math.round(y / 8)}`;
+    const group = groups.get(groupKey) ?? [];
+    group.push(mission);
+    groups.set(groupKey, group);
+  });
+
+  groups.forEach((group) => {
+    group.sort((left, right) => left.id.localeCompare(right.id));
+    group.forEach((mission, index) => offsets.set(mission.id, offsetPattern[index] ?? [0, 0]));
+  });
+  return offsets;
 }
 
 export default function LandingMarkers({ missions = [], onSelectMission, selectedId }) {
@@ -77,15 +120,17 @@ export default function LandingMarkers({ missions = [], onSelectMission, selecte
     [onSelectMission]
   );
 
-  const displayable = missions.filter(isConfirmedSurfaceLanding);
+  const displayable = missions.filter(isDisplayableSurfaceMarker);
+  const overlapOffsets = getOverlapOffsets(displayable);
 
   return (
     <>
       {displayable.map((mission) => {
-        const position = latLonToMapCoordinates(mission.latitude, mission.longitude);
+        const [latitude, longitude] = getMarkerCoordinates(mission);
+        const position = latLonToMapCoordinates(latitude, longitude);
         const isSelected = mission.id === selectedId;
-        const icon = createMarkerIcon(mission, isSelected);
-        const missionType = mission.type ?? mission.category ?? 'surface mission';
+        const icon = createMarkerIcon(mission, isSelected, overlapOffsets.get(mission.id) ?? [0, 0]);
+        const missionType = mission.surfaceEvent?.label ?? mission.type ?? mission.category ?? 'surface mission';
 
         return (
           <Marker
@@ -106,8 +151,8 @@ export default function LandingMarkers({ missions = [], onSelectMission, selecte
                 <div style={{ color: '#000000', fontSize: '9px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                   {mission.agency}
                 </div>
-                {mission.landingSite && (
-                  <div style={{ color: '#000000', fontSize: '10px' }}>{mission.landingSite}</div>
+                {(mission.surfaceEvent?.label || mission.landingSite) && (
+                  <div style={{ color: '#000000', fontSize: '10px' }}>{mission.surfaceEvent?.label || mission.landingSite}</div>
                 )}
               </div>
             </Tooltip>
@@ -116,20 +161,23 @@ export default function LandingMarkers({ missions = [], onSelectMission, selecte
             <Popup>
               <div>
                 <div className="map-popup-name">{mission.name}</div>
-                <div className={`map-popup-agency ${mission.agency.toLowerCase()}`}>
+                <div className={`map-popup-agency ${mission.agency.toLowerCase()}`} style={{ color: getMissionColor(mission) }}>
                   {mission.agency} · {missionType}
                 </div>
-                {mission.landingSite && (
-                  <div className="map-popup-site">📍 {mission.landingSite}</div>
+                {(mission.surfaceEvent?.label || mission.landingSite) && (
+                  <div className="map-popup-site">📍 {mission.surfaceEvent?.label || mission.landingSite}</div>
                 )}
-                {mission.landingDate && (
+                {mission.landingDate && !mission.surfaceEvent && (
                   <div style={{ fontSize: '10px', color: '#B8A69A', marginBottom: '4px' }}>
                     Landed: {mission.landingDate}
                   </div>
                 )}
                 <div style={{ fontSize: '10px', color: '#B8A69A', marginBottom: '6px' }}>
-                  {mission.latitude?.toFixed(4)}°, {mission.longitude?.toFixed(4)}°
+                  {latitude.toFixed(4)}°, {longitude.toFixed(4)}°
                 </div>
+                {mission.surfaceEvent && (
+                  <div style={{ fontSize: '10px', color: '#B8A69A' }}>{mission.surfaceEvent.coordinatePrecision}</div>
+                )}
               </div>
             </Popup>
           </Marker>
