@@ -333,15 +333,15 @@
 .discovery-card { display: grid; grid-template-columns: 60px minmax(0, 1fr) 18px; align-items: center; gap: 11px; width: 100%; min-height: 70px; padding: 8px; text-align: left; color: inherit; background: rgba(41, 37, 42, .78); border: 1px solid transparent; border-radius: 9px; cursor: pointer; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
 .discovery-card:hover { background: var(--panel-raised); border-color: rgba(228, 122, 69, .28); transform: translateY(-1px); }
 .discovery-card.is-selected { background: linear-gradient(110deg, rgba(118, 47, 43, .35), rgba(41, 37, 42, .88) 64%); border-color: rgba(255, 153, 51, .56); box-shadow: inset 3px 0 #39ff14; }
-.discovery-art { position: relative; display: grid; width: 60px; height: 54px; overflow: hidden; place-items: center; border-radius: 6px; background: linear-gradient(145deg, #52332f, #aa5135 56%, #d18450); background-image: linear-gradient(145deg, rgba(56, 32, 31, .38), rgba(182, 77, 50, .12)), url('/images/mars-base_4k.jpg'); background-size: cover, 230px auto; background-position: center, 36% 48%; }
+.discovery-art { position: relative; display: grid; width: 60px; height: 54px; overflow: hidden; place-items: center; border-radius: 6px; background: linear-gradient(145deg, #52332f, #aa5135 56%, #d18450); }
 .discovery-art::before, .discovery-art::after, .discovery-art span { position: absolute; display: block; content: ""; }
 .discovery-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.78) contrast(1.04); transition: transform .45s ease; }
 .discovery-card:hover .discovery-art img { transform: scale(1.08); }
 .discovery-art::before { right: -8px; bottom: -15px; left: -8px; height: 35px; border-radius: 50% 50% 0 0; background: rgba(27, 20, 22, .58); transform: rotate(-7deg); }
 .discovery-art::after { top: 9px; right: 13px; width: 13px; height: 13px; border: 1px solid rgba(244, 232, 221, .6); border-radius: 50%; box-shadow: 0 0 12px rgba(244, 232, 221, .28); }
 .discovery-art span { z-index: 1; bottom: 11px; left: 13px; width: 27px; height: 5px; border-radius: 50%; background: rgba(244, 232, 221, .28); }
-.discovery-art-2 { background-image: linear-gradient(145deg, rgba(54, 34, 31, .44), rgba(141, 73, 53, .18)), url('/images/mars-base_4k.jpg'); background-position: center, 62% 35%; }
-.discovery-art-3 { background-image: linear-gradient(145deg, rgba(45, 34, 32, .5), rgba(117, 80, 61, .16)), url('/images/mars-base_4k.jpg'); background-position: center, 78% 60%; }
+.discovery-art-2 { background: linear-gradient(145deg, #392b2d, #8d4935); }
+.discovery-art-3 { background: linear-gradient(145deg, #2d2220, #75503d); }
 .discovery-copy { display: grid; min-width: 0; gap: 4px; }
 .discovery-meta { overflow: hidden; color: var(--sand); font-size: 8px; letter-spacing: .09em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
 .discovery-meta i { display: inline-block; width: 3px; height: 3px; margin: 0 4px 2px; border-radius: 50%; background: var(--orange); }

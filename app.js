@@ -61,6 +61,7 @@ const loader = new GLTFLoader();
 loadPlanet('mars', marsModelUrl);
 loadPlanet('moon', moonModelUrl);
 
+const landerPages = { mars: 'mars-landers.html' };
 const planetButtons = document.querySelectorAll('[data-planet]');
 planetButtons.forEach((button) => button.addEventListener('click', () => {
   const planet = button.dataset.planet;
@@ -74,8 +75,9 @@ planetButtons.forEach((button) => button.addEventListener('click', () => {
     option.classList.toggle('is-active', selected);
     option.setAttribute('aria-pressed', String(selected));
   });
-  document.querySelector('main').setAttribute('aria-label', `Interactive view of ${planet === 'mars' ? 'Mars' : 'the Moon'}`);
-  canvas.setAttribute('aria-label', `${planet === 'mars' ? 'Mars' : 'The Moon'} in space. Drag to rotate and scroll to zoom.`);
+  const planetName = planet === 'mars' ? 'Mars' : 'the Moon';
+  document.querySelector('main').setAttribute('aria-label', `Interactive view of ${planetName}`);
+  canvas.setAttribute('aria-label', `${planetName} in space. Drag to rotate and scroll to zoom.`);
   if (planetModels[planet]) {
     if (activeModel) globe.remove(activeModel);
     activeModel = planetModels[planet];
@@ -83,11 +85,9 @@ planetButtons.forEach((button) => button.addEventListener('click', () => {
   }
 }));
 
-// Replace these destinations with the lander pages when they are ready.
-const landerPages = { mars: 'mars-landers.html', moon: 'moon-landers.html' };
 canvas.addEventListener('planetselect', (event) => {
   const { planet } = event.detail;
-  window.location.href = landerPages[planet];
+  if (landerPages[planet]) window.location.href = landerPages[planet];
 });
 
 const ambient = new THREE.AmbientLight(0x938b88, 1.2);

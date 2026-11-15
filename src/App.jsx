@@ -9,6 +9,8 @@ import { isConfirmedSurfaceLanding } from './components/LandingMarkers';
 import surfaceMissions from './data/surfaceMissions.json';
 import marsMissionCatalog from './data/marsMissionCatalog.json';
 
+const publicAsset = (path) => `${import.meta.env.BASE_URL}${String(path).replace(/^\//, '')}`;
+
 /**
  * App.jsx — Person 2 integration demo
  *
@@ -44,6 +46,7 @@ export default function App() {
           </span>
         </a>
         <nav className="header-nav" aria-label="Page sections">
+          <a href="./index.html">← Back to the globes</a>
           <a href="#surface-map">Surface map</a>
           <a href="#mission-image">Mission image</a>
           <a href="#discoveries">Discoveries</a>
@@ -77,7 +80,7 @@ export default function App() {
                 <span className="index-mark">MARS / 01</span>
               </div>
               <figure className="mission-image-frame">
-                <img src={selectedMission?.image || '/images/mars-base_4k.jpg'} alt={selectedMission ? `Mars surface map view for ${selectedMission.name}` : 'Global Mars surface map'} loading="lazy" />
+                <img src={publicAsset(selectedMission?.image || '/images/mars-base_4k.jpg')} alt={selectedMission ? `Mars surface map view for ${selectedMission.name}` : 'Global Mars surface map'} loading="lazy" />
                 <div className="image-vignette" />
                 <figcaption>
                   <span className="image-caption-kicker">{selectedMission ? 'Selected expedition' : 'Surface atlas'}</span>
@@ -97,7 +100,7 @@ export default function App() {
                 {featuredDiscoveries.map((mission, index) => (
                   <button className={`discovery-card${selectedMission?.id === mission.id ? ' is-selected' : ''}`} key={mission.id} onClick={() => setSelectedMission(mission)} type="button">
                     <span className={`discovery-art discovery-art-${index + 1}`} aria-hidden="true">
-                      <img src={mission.image || '/images/mars-base_4k.jpg'} alt="" loading="lazy" />
+                      <img src={publicAsset(mission.image || '/images/mars-base_4k.jpg')} alt="" loading="lazy" />
                       <span />
                     </span>
                     <span className="discovery-copy">

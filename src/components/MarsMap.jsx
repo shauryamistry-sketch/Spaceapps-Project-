@@ -8,7 +8,7 @@ import { MAP_WIDTH, MAP_HEIGHT, getMapBounds, getInitialCenter } from '../utils/
 import LandingMarkers from './LandingMarkers';
 
 // Image URL — uses the original mars-base_4k.jpg copied to public/images/
-const MARS_IMAGE_URL = '/images/mars-base_4k.jpg';
+const MARS_IMAGE_URL = `${import.meta.env.BASE_URL}images/mars-base_4k.jpg`;
 
 /**
  * MarsMap
