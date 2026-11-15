@@ -12,3 +12,38 @@ body { min-width: 320px; }
 .controls button:hover { background: #292929; }
 .load-message { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(90vw, 420px); color: #eee; text-align: center; font: 14px/1.6 Arial, sans-serif; }
 @media (max-width: 600px) { .controls { right: 14px; bottom: 14px; } .planet-switch { top: 14px; } }
+
+.orbit-readout {
+  position: fixed;
+  z-index: 1;
+  top: 84px;
+  right: 24px;
+  display: grid;
+  gap: 5px;
+  width: min(290px, 27vw);
+  padding: 15px 17px;
+  border: 1px solid rgba(238, 191, 157, .24);
+  border-radius: 14px;
+  background: rgba(23, 19, 18, .82);
+  color: #f8eee5;
+  font: 12px/1.45 Inter, "Aptos", "Segoe UI", sans-serif;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .2);
+  transition: background-color 520ms ease, color 520ms ease, border-color 520ms ease, box-shadow 520ms ease;
+}
+.orbit-readout[hidden] { display: none; }
+.orbit-readout > span { color: #d9a47e; font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.orbit-readout > strong { color: #fff7f0; font: 400 17px/1.25 Georgia, "Times New Roman", serif; }
+.orbit-readout > small { color: #e1d0c4; font-size: 11px; }
+.orbit-readout > em { color: #c3aea0; font-size: 10px; font-style: normal; }
+main[data-theme="moon"] .orbit-readout { border-color: rgba(174, 199, 231, .28); background: rgba(16, 21, 30, .84); color: #f2f6ff; }
+main[data-theme="moon"] .orbit-readout > span { color: #b9d8fb; }
+main[data-theme="moon"] .orbit-readout > strong { color: #f6f9ff; }
+main[data-theme="moon"] .orbit-readout > small { color: #d2deef; }
+main[data-theme="moon"] .orbit-readout > em { color: #b4c4dc; }
+@media (max-width: 700px) {
+  .orbit-readout { top: 65px; right: 12px; width: min(250px, calc(100% - 24px)); padding: 10px 12px; }
+  .orbit-readout > strong { font-size: 15px; }
+  .controls { z-index: 3; }
+}
+@media (prefers-reduced-motion: reduce) { .orbit-readout { transition-duration: .01ms; } }
