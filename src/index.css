@@ -1,0 +1,52 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #171319;
+  --bg-secondary: #29252a;
+  --bg-card: #29252a;
+  --border-color: rgba(214, 173, 130, .18);
+  --accent-cyan: #00d4ff;
+  --accent-green: #39ff14;
+  --accent-orange: #ff9933;
+  --text-primary: #f4e8dd;
+  --text-secondary: #d6ad82;
+  --text-muted: #b8a69a;
+  --nasa-blue: #00d4ff;
+  --isro-saffron: #ff9933;
+  font-family: Inter, "Aptos", "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font: inherit;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #171319; }
+::-webkit-scrollbar-thumb { background: #51413d; border: 2px solid #171319; border-radius: 999px; }
