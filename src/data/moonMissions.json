@@ -1,0 +1,251 @@
+[
+  {
+    "id": "apollo-11", "name": "Apollo 11", "agency": "NASA", "country": "United States", "launchYear": 1969,
+    "launchDate": "1969-07-16", "endDate": "1969-07-24", "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Mare Tranquillitatis", "latitude": 0.67416, "longitude": 23.47314, "landingDate": "1969-07-20", "objective": null,
+    "sourceCoordinates": { "latitude": 0.67416, "longitude": 23.47314, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 11 Lunar Module at 0.67416° N, 23.47314° E.", "achievements": [], "image": "https://images-assets.nasa.gov/image/jsc2007e034221/jsc2007e034221~medium.jpg",
+    "imageNasaId": "jsc2007e034221", "imageTitle": "Apollo 11 spacecraft pre-launch",
+    "imageSourceApi": "NASA Image and Video Library API",
+    "imageSourceEndpoint": "https://images-api.nasa.gov/search?q=Apollo%2011&media_type=image",
+    "sourceAgency": "NASA", "sourceApi": "NASA OSDR API", "sourceEndpoint": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2011",
+    "sourceRecordId": "6823e683a5377f9a1aa832de", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-12", "name": "Apollo 12", "agency": "NASA", "country": "United States", "launchYear": 1969,
+    "launchDate": "1969-11-14", "endDate": "1969-11-24", "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Oceanus Procellarum", "latitude": -3.0128, "longitude": -23.4219, "landingDate": "1969-11-19", "objective": null,
+    "sourceCoordinates": { "latitude": -3.0128, "longitude": -23.4219, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 12 Lunar Module at 3.0128° S, 23.4219° W.", "achievements": [], "image": null, "sourceAgency": "NASA", "sourceApi": "NASA OSDR API; NASA Image and Video Library API",
+    "sourceEndpoint": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2012; https://images-api.nasa.gov/search?q=Apollo%2012%20landing%20coordinates&media_type=image&page_size=100", "sourceRecordId": "6823e6a67e7bb8f408381547; S69-57076", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-14", "name": "Apollo 14", "agency": "NASA", "country": "United States", "launchYear": 1971,
+    "launchDate": "1971-01-31", "endDate": "1971-02-09", "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Fra Mauro", "latitude": -3.64589, "longitude": -17.47194, "landingDate": "1971-02-05", "objective": null,
+    "sourceCoordinates": { "latitude": -3.64589, "longitude": -17.47194, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 14 Lunar Module at 3.64589° S, 17.47194° W.", "achievements": [], "image": null, "sourceAgency": "NASA", "sourceApi": "NASA OSDR API",
+    "sourceEndpoint": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2014", "sourceRecordId": "6823e6d55a91913eb3d11fd9", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-15", "name": "Apollo 15", "agency": "NASA", "country": "United States", "launchYear": 1971,
+    "launchDate": "1971-07-26", "endDate": "1971-08-07", "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Hadley Rille", "latitude": 26.13239, "longitude": 3.6333, "landingDate": "1971-07-30", "objective": null,
+    "sourceCoordinates": { "latitude": 26.13239, "longitude": 3.6333, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 15 Lunar Module at 26.13239° N, 3.63330° E.", "achievements": [], "image": null, "sourceAgency": "NASA", "sourceApi": "NASA OSDR API",
+    "sourceEndpoint": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2015", "sourceRecordId": "6823e7005a91913eb3d11fda", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-16", "name": "Apollo 16", "agency": "NASA", "country": "United States", "launchYear": 1972,
+    "launchDate": "1972-04-16", "endDate": "1972-04-27", "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Descartes", "latitude": -8.9734, "longitude": 15.5011, "landingDate": "1972-04-20", "objective": null,
+    "sourceCoordinates": { "latitude": -8.9734, "longitude": 15.5011, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 16 Lunar Module at 8.9734° S, 15.5011° E.", "achievements": [], "image": null, "sourceAgency": "NASA", "sourceApi": "NASA OSDR API",
+    "sourceEndpoint": "https://osdr.nasa.gov/geode-py/ws/api/mission/Apollo%2016", "sourceRecordId": "6823e72b8afa00b04c25238f", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-8", "name": "Apollo 8", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lunar-orbit", "status": null, "outcome": null,
+    "crewStatus": "Manned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": "NASA media metadata identifies the Apollo 8 crew and describes the mission as a lunar-orbit mission.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/S69-16402/S69-16402~thumb.jpg", "imageNasaId": "S69-16402",
+    "imageTitle": "Apollo 8", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Apollo%208&media_type=image&page_size=10", "sourceRecordId": "S69-16402", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-10", "name": "Apollo 10", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": null, "status": null, "outcome": null,
+    "crewStatus": "Manned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": null, "achievements": [], "image": "https://images-assets.nasa.gov/image/S69-27915/S69-27915~thumb.jpg",
+    "imageNasaId": "S69-27915", "imageTitle": "Prelaunch - Apollo 10 (rollout)", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Apollo%2010&media_type=image&page_size=10", "sourceRecordId": "S69-27915", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-13", "name": "Apollo 13", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": null, "status": null, "outcome": null,
+    "crewStatus": "Manned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": null, "achievements": [], "image": "https://images-assets.nasa.gov/image/S69-60662/S69-60662~thumb.jpg",
+    "imageNasaId": "S69-60662", "imageTitle": "Apollo 13 Emblem", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Apollo%2013&media_type=image&page_size=10", "sourceRecordId": "S69-60662", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "apollo-17", "name": "Apollo 17", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "crewed-lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Manned", "landingSite": "Taurus-Littrow", "latitude": 20.1911, "longitude": 30.7723, "landingDate": "1972-12-11", "objective": null,
+    "sourceCoordinates": { "latitude": 20.1911, "longitude": 30.7723, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Planetocentric Mean Earth/Polar Axis Lunar Reference System — DE421 ephemeris", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html",
+    "description": "NASA NSSDC lists the Apollo 17 Lunar Module at 20.1911° N, 30.7723° E.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/as17-162-24050/as17-162-24050~thumb.jpg", "imageNasaId": "as17-162-24050",
+    "imageTitle": "Apollo 17, Eugene A. Cernan inside the Command Module", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Apollo%2017%20landing%20coordinates&media_type=image&page_size=100", "sourceRecordId": "S72-01716", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "surveyor-1", "name": "Surveyor 1", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lander", "status": "successful", "outcome": "Successful soft landing",
+    "crewStatus": "Unmanned", "landingSite": "Flamsteed P", "latitude": -2.45, "longitude": -43.21, "landingDate": "1966-06-02", "objective": null,
+    "sourceCoordinates": { "latitude": -2.45, "longitude": 316.79, "longitudeConvention": "east-positive, 0–360°" }, "coordinateReferenceFrame": "Not documented on the NSSDC Surveyor archive", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html",
+    "description": "NASA NSSDC lists Surveyor 1 at 2.45° S, 316.79° E; the rendered −43.21° longitude is the equivalent signed east-positive value.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/PIA02976/PIA02976~thumb.jpg", "imageNasaId": "PIA02976",
+    "imageTitle": "Surveyor 1 Shadow", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Surveyor%201&media_type=image&page_size=10", "sourceRecordId": "PIA02976", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "surveyor-3", "name": "Surveyor 3", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Unmanned", "landingSite": "Oceanus Procellarum", "latitude": -3.01, "longitude": -23.34,
+    "objective": null, "sourceCoordinates": { "latitude": -3.01, "longitude": 336.66, "longitudeConvention": "east-positive, 0–360°" }, "coordinateReferenceFrame": "Not documented on the NSSDC Surveyor archive", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html",
+    "description": "NASA NSSDC lists Surveyor 3 at 3.01° S, 336.66° E; the rendered −23.34° longitude is the equivalent signed east-positive value.", "landingDate": "1967-04-20", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/as12-48-7121/as12-48-7121~thumb.jpg", "imageNasaId": "as12-48-7121",
+    "imageTitle": "View of Surveyor III in its crater", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Surveyor%203%20landing%20coordinates&media_type=image&page_size=100", "sourceRecordId": "S69-57076", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "surveyor-5", "name": "Surveyor 5", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Unmanned", "landingSite": "Mare Tranquillitatis", "latitude": 1.41, "longitude": 23.18,
+    "landingDate": "1967-09-11", "objective": null,
+    "sourceCoordinates": { "latitude": 1.41, "longitude": 23.18, "longitudeConvention": "east-positive, 0–360°" }, "coordinateReferenceFrame": "Not documented on the NSSDC Surveyor archive", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html",
+    "description": "NASA NSSDC lists Surveyor 5 at 1.41° N, 23.18° E.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/PIA02978/PIA02978~thumb.jpg", "imageNasaId": "PIA02978",
+    "imageTitle": "Surveyor 5 Footpad Resting on the Lunar Soil", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Surveyor%205&media_type=image&page_size=10", "sourceRecordId": "PIA02978", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "surveyor-6", "name": "Surveyor 6", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Unmanned", "landingSite": "Sinus Medii", "latitude": 0.49, "longitude": -1.4,
+    "landingDate": "1967-11-10", "objective": null,
+    "sourceCoordinates": { "latitude": 0.49, "longitude": 358.6, "longitudeConvention": "east-positive, 0–360°" }, "coordinateReferenceFrame": "Not documented on the NSSDC Surveyor archive", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html",
+    "description": "NASA NSSDC lists Surveyor 6 at 0.49° N, 358.60° E; the rendered −1.40° longitude is the equivalent signed east-positive value.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/PIA12978/PIA12978~thumb.jpg", "imageNasaId": "PIA12978",
+    "imageTitle": "Surveyor 6 on the Plains of Sinus Medii", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Surveyor%206&media_type=image&page_size=10", "sourceRecordId": "PIA12978", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "surveyor-7", "name": "Surveyor 7", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "lander", "status": "successful", "outcome": "Landed on the Moon",
+    "crewStatus": "Unmanned", "landingSite": "Tycho North Rim", "latitude": -40.86, "longitude": -11.47, "landingDate": "1968-01-10", "objective": null,
+    "sourceCoordinates": { "latitude": -40.86, "longitude": 348.53, "longitudeConvention": "east-positive, 0–360°" }, "coordinateReferenceFrame": "Not documented on the NSSDC Surveyor archive", "landingCoordinateSource": "https://nssdc.gsfc.nasa.gov/planetary/lunar/surveyor.html",
+    "description": "NASA NSSDC lists Surveyor 7 at 40.86° S, 348.53° E; the rendered −11.47° longitude is the equivalent signed east-positive value.", "achievements": [], "image": "https://images-assets.nasa.gov/image/PIA02977/PIA02977~thumb.jpg",
+    "imageNasaId": "PIA02977", "imageTitle": "Photomosaic of Tycho Crater - Surveyor 7", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Surveyor%207&media_type=image&page_size=10", "sourceRecordId": "PIA02977", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "lunar-orbiter-3", "name": "Lunar Orbiter III", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "orbiter", "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": "Photograph potential lunar landing sites.",
+    "description": "NASA media metadata describes Lunar Orbiter III imaging the lunar surface for candidate landing-site surveys.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/LRC-1967-B701_P-04028/LRC-1967-B701_P-04028~thumb.jpg", "imageNasaId": "LRC-1967-B701_P-04028",
+    "imageTitle": "LRC-1967-B701_P-04028", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Lunar%20Orbiter&media_type=image&page_size=10", "sourceRecordId": "LRC-1967-B701_P-04028", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "lunar-reconnaissance-orbiter", "name": "Lunar Reconnaissance Orbiter", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "orbiter", "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": null, "achievements": [], "image": "https://images-assets.nasa.gov/image/PIA12088/PIA12088~thumb.jpg",
+    "imageNasaId": "PIA12088", "imageTitle": "Diviner Following Integration to the Lunar Reconnaissance Orbiter LRO", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Lunar%20Reconnaissance%20Orbiter&media_type=image&page_size=10", "sourceRecordId": "PIA12088", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "lunar-prospector", "name": "Lunar Prospector", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "orbiter", "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": null, "achievements": [], "image": "https://images-assets.nasa.gov/image/PIA18162/PIA18162~thumb.jpg",
+    "imageNasaId": "PIA18162", "imageTitle": "Lunar Prospector Artist Concept", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Lunar%20Prospector&media_type=image&page_size=10", "sourceRecordId": "PIA18162", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "lcross", "name": "LCROSS", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": null, "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": "NASA media metadata describes the LCROSS mission's impact into the lunar surface to examine the resulting ejecta for water.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/SSC-20091009-S01945H/SSC-20091009-S01945H~thumb.jpg", "imageNasaId": "SSC-20091009-S01945H",
+    "imageTitle": "Stennis engineer part of LCROSS moon mission", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=LCROSS&media_type=image&page_size=10", "sourceRecordId": "SSC-20091009-S01945H", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "grail", "name": "GRAIL", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": null, "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": null, "achievements": [], "image": "https://images-assets.nasa.gov/image/PIA16622/PIA16622~thumb.jpg",
+    "imageNasaId": "PIA16622", "imageTitle": "GRAIL Gravity Tour of the Moon", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=GRAIL&media_type=image&page_size=10", "sourceRecordId": "PIA16622", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "ladee", "name": "LADEE", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": "orbiter", "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": "NASA media metadata describes the LADEE observatory approaching lunar orbit.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/PIA18160/PIA18160~thumb.jpg", "imageNasaId": "PIA18160",
+    "imageTitle": "LADEE Approaches Lunar Orbit Artist Concept", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=LADEE&media_type=image&page_size=10", "sourceRecordId": "PIA18160", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "artemis-i", "name": "Artemis I", "agency": "NASA", "country": "United States", "launchYear": null,
+    "launchDate": null, "endDate": null, "type": null, "status": null, "outcome": null,
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null, "objective": null,
+    "description": "NASA media metadata describes Orion splashing down after a 25.5-day Artemis I mission.", "achievements": [],
+    "image": "https://images-assets.nasa.gov/image/Artemis%20I%20Administrator%20Nelson/Artemis%20I%20Administrator%20Nelson~thumb.jpg", "imageNasaId": "Artemis I Administrator Nelson",
+    "imageTitle": "Artemis I Administrator Nelson", "imageSourceApi": "NASA Image and Video Library API",
+    "sourceAgency": "NASA", "sourceApi": "NASA Image and Video Library API",
+    "sourceEndpoint": "https://images-api.nasa.gov/search?q=Artemis%20I&media_type=image&page_size=10", "sourceRecordId": "Artemis I Administrator Nelson", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "chandrayaan-1", "name": "Chandrayaan-1", "agency": "ISRO", "country": "India", "launchYear": 2008,
+    "launchDate": "2008-10-22", "type": "orbiter", "status": "completed", "outcome": "Major objectives completed; contact lost on 2009-08-29",
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null,
+    "surfaceCategory": "Surface Impact Probe", "spacecraftComponents": ["Orbiter", "Moon Impact Probe (MIP)"],
+    "missionTimeline": ["2008-10-22 · Launch", "2008-11-14 · MIP released and impacted near the south pole", "2009-08-29 · Communication lost"],
+    "objective": "Lunar chemical, mineralogical and photo-geologic mapping.",
+    "description": "ISRO reports that the spacecraft completed its major mission objectives while orbiting the Moon; communication was lost on 29 August 2009.",
+    "achievements": ["Completed all major mission objectives", "Made more than 3,400 lunar orbits"],
+    "scientificAchievements": [{"title": "South-polar impact-probe descent", "instrument": "Moon Impact Probe", "observation": "ISRO records a descent along 140° E to a location close to 89° S.", "significance": "Shown as a controlled impact event, not a successful landing."}], "image": null,
+    "surfaceEvent": { "type": "controlled-impact", "label": "Moon Impact Probe impact vicinity", "latitude": -89, "longitude": 140, "coordinatePrecision": "Approximate; ISRO describes a descent along 140° E, landing close to 89° S", "source": "https://new1.isro.gov.in/Payloads.html" },
+    "sourceAgency": "ISRO", "sourceUrl": "https://www.isro.gov.in/Chandrayaan_1.html", "sourceEndpoint": "https://www.isro.gov.in/Chandrayaan_1.html", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "chandrayaan-2", "name": "Chandrayaan-2", "agency": "ISRO", "country": "India", "launchYear": 2019,
+    "launchDate": "2019-07-22", "type": "orbiter-lander-rover", "status": "partial-success", "outcome": "Orbiter operating; Vikram landing attempt lost communication during descent",
+    "crewStatus": "Unmanned", "landingSite": null, "latitude": null, "longitude": null,
+    "surfaceCategory": "Failed Landing Attempt", "spacecraftComponents": ["Orbiter", "Vikram lander", "Pragyan rover (not deployed)"],
+    "missionTimeline": ["2019-07-22 · Launch", "2019-08-20 · Lunar orbit insertion", "2019-09-06 · Vikram descent lost communication and hard landed"],
+    "objective": "Study the Moon from orbit and demonstrate a lander and rover near the south polar region.",
+    "description": "ISRO reports that the Orbiter entered lunar orbit and its payloads remained operational. The Vikram lander separated, descended to about 2 km altitude, then communication was lost. The mission includes Orbiter, Vikram lander and Pragyan rover; the lander did not make a confirmed soft landing.",
+    "achievements": ["Orbiter reached lunar orbit and operated its payloads"],
+    "scientificAchievements": [{"title": "Vikram descent outcome", "instrument": "Vikram lander", "observation": "ISRO reported lost communication during descent; the official parliamentary response describes a hard landing within 500 m of the designated site.", "significance": "The marker is an approximate crash vicinity and is explicitly not a successful landing."}], "image": null,
+    "surfaceEvent": { "type": "crash-site", "label": "Vikram hard-landing vicinity", "latitude": -70.9, "longitude": 22.7, "coordinatePrecision": "Approximate; official parliamentary response places the hard landing within 500 m of the designated site", "source": "https://www.isro.gov.in/media_isro/pdf/docs/UsefulLinks/ParliamentQuestions/winter_session_2019.pdf" },
+    "sourceAgency": "ISRO", "sourceUrl": "https://www.isro.gov.in/Chandrayaan2_science.html", "sourceEndpoint": "https://www.isro.gov.in/Chandrayaan2_science.html", "retrievedAt": "2026-11-14"
+  },
+  {
+    "id": "chandrayaan-3", "name": "Chandrayaan-3", "agency": "ISRO", "country": "India", "launchYear": 2023,
+    "launchDate": "2023-07-14", "type": "lander-rover", "status": "successful", "outcome": "Soft landing and rover surface operations demonstrated",
+    "crewStatus": "Unmanned", "landingSite": "Shiv Shakti Point", "latitude": -69.367621, "longitude": 32.348126,
+    "sourceCoordinates": { "latitude": -69.367621, "longitude": 32.348126, "longitudeConvention": "degrees east" }, "coordinateReferenceFrame": "Not documented on the ISRO mission details page", "landingCoordinateSource": "https://www.isro.gov.in/ISRO_EN/Chandrayaan3_Details.html",
+    "surfaceCategory": "Rover Mission", "spacecraftComponents": ["Propulsion Module", "Vikram lander", "Pragyan rover"],
+    "missionTimeline": ["2023-07-14 · Launch", "2023-08-23 · Soft landing", "2023-08-24 · Pragyan rover deployed", "2023-09-03 · Rover placed into sleep mode"],
+    "objective": "Demonstrate a safe soft landing, rover mobility and in-situ lunar experiments.",
+    "description": "ISRO describes the mission's Lander, Rover and Propulsion Module and gives the prime landing site at 69.367621° S, 32.348126° E.",
+    "achievements": ["Demonstrated soft landing on the lunar surface", "Deployed a rover to perform in-situ analysis"],
+    "scientificAchievements": [
+      {"title": "Elemental detection at the landing site", "instrument": "LIBS", "observation": "ISRO reported sulfur, aluminium, calcium, iron, chromium and titanium; later observations also reported manganese, silicon and oxygen.", "significance": "Direct in-situ elemental measurements from the south-polar region."},
+      {"title": "Near-surface plasma measurement", "instrument": "RAMBHA-LP", "observation": "ISRO reported electron densities of about 380–600 electrons per cubic centimetre during the mission's observations.", "significance": "Characterizes the near-surface lunar plasma environment."},
+      {"title": "Lander–surface interaction", "instrument": "Vikram propulsion system", "observation": "ISRO reported that landing exhaust displaced about 2.06 tonnes of material over 108.4 square metres.", "significance": "Supports interpretation of lander interactions with lunar regolith."}
+    ], "image": null,
+    "sourceAgency": "ISRO", "sourceUrl": "https://www.isro.gov.in/Chandrayaan3_Details.html", "sourceEndpoint": "https://www.isro.gov.in/Chandrayaan3_Details.html", "retrievedAt": "2026-11-14"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "chandrayaan-1-orbital-record",
+    "missionId": "chandrayaan-1",
+    "name": "Chandrayaan-1 Orbiter",
+    "agency": "ISRO",
+    "classification": "orbital-record",
+    "components": ["Orbiter", "Moon Mineralogy Mapper", "Mini-SAR", "CHACE"],
+    "summary": "Preserved orbital-science record for a future orbital missions experience. The Moon Impact Probe remains in the surface experience.",
+    "source": "https://www.isro.gov.in/ISRO_EN/Chandrayaan-1_science.html"
+  },
+  {
+    "id": "chandrayaan-2-orbital-record",
+    "missionId": "chandrayaan-2",
+    "name": "Chandrayaan-2 Orbiter",
+    "agency": "ISRO",
+    "classification": "orbital-record",
+    "components": ["Orbiter", "CLASS", "CHACE-2", "IIRS", "DFSAR", "OHRC", "TMC-2", "DFRS"],
+    "summary": "Preserved orbital-science record for a future orbital missions experience. Vikram's failed landing attempt remains in the surface experience.",
+    "source": "https://www.isro.gov.in/ISRO_EN/ScienceandDataProduct.html"
+  }
+]
